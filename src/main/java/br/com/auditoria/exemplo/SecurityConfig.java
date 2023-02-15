@@ -5,17 +5,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+    private static final String[] AUTH_WHITELIST = {
+        "/h2-console/**",
+        "/authenticate",
+        "/swagger-resources/**",
+        "/swagger-ui/**",
+        "/v3/api-docs",
+        "/webjars/**"
+};
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         http.csrf().disable().headers().frameOptions().disable().and()
         .authorizeRequests()
-        .antMatchers("/h2-console/**").permitAll().and()
+        .antMatchers(AUTH_WHITELIST).permitAll().and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .httpBasic();
@@ -29,4 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .password("{noop}admin")
                 .roles("USER","ADMIN");
     }
+
+
+
 }

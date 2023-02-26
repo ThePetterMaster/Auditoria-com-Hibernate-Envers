@@ -22,7 +22,7 @@ public class ProdutoController {
     @Autowired
     private GenericRevisionRepository genericRevisionRepository;
 
-    @RequestMapping(value = "/novoProduto", method = RequestMethod.PUT)
+    @RequestMapping(value = "/novoProduto", method = RequestMethod.POST)
     public ResponseEntity<Produto> novoProduto(@RequestBody Produto produto) {
         Produto produtoObject = produtoService.findBySku(produto.getSku());
         if(produtoObject != null)

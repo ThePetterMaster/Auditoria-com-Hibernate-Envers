@@ -29,7 +29,7 @@ public class GenericRevisionRepository<T> {
             T listaRevisoes = auditReader.find(tipo, id, revisao);
             Revisao r = revisoes.get(revisao);
             auditReader.findRevisions(Revisao.class,new HashSet<Number>(idsRevisao));
-            allRevisions.add(new EntidadeComRevisao(new Revisao(r.getRevisaoId(), r.getRevisaoData(),r.getIp(),r.getUsuario()), listaRevisoes));
+            allRevisions.add(new EntidadeComRevisao(new Revisao(r.getRevisaoId(), r.getRevisaoData(),r.getUsuario(),r.getIp()), listaRevisoes));
         }
         return allRevisions;
     }

@@ -31,7 +31,7 @@ public class CategoriaController {
     @Autowired
     private GenericRevisionRepository genericRevisionRepository;
 
-    @RequestMapping(value = "/novaCategoria", method = RequestMethod.PUT)
+    @RequestMapping(value = "/novaCategoria", method = RequestMethod.POST)
     public ResponseEntity<Categoria> novaCategoria(@RequestBody Categoria categoria) {
         Categoria cat = categoriaService.findByNome(categoria.getNome());
         if(cat != null)
